@@ -1,9 +1,11 @@
 //! Requiring modules  --  START
 var Grass = require("./modules/Grass.js");
 var GrassEater = require("./modules/GrassEater.js");
-var Gishatich = require("./modules/Hunter.js");
-var Boy = require("./modules/Terminator.js");
-var Water= require("./modules/Titan.js");
+var Gishatich = require("./modules/Gishatich.js");
+var Boy = require("./modules/Boy.js");
+var Water= require("./modules/Water.js");
+var Sun= require("./modules/Sun.js");
+var Night= require("./modules/Night.js");
 let random = require('./modules/random');
 //! Requiring modules  --  END
 
@@ -13,21 +15,25 @@ grassEaterArr = [];
 gishatichArr = [];
 boyArr = [];
 waterArr = [];
+sunArr = [];
+nightArr = [];
 matrix = [];
 //! Initializing global arrays  --  END
 
 // statistics start
 grassHashiv = 0;
-eatHashiv = 0;
-huntHashiv = 0;
-termHashiv = 0;
-titanHashiv = 0;
+grassEaterHashiv = 0;
+gishatichHashiv = 0;
+boyHashiv = 0;
+waterHashiv = 0;
+sunHashiv = 0;
+nightHashiv = 0;
 // statistics end
 
 // time = 0
 //! Creating MATRIX -- START
 
-function matrixGenerator(matrixSize, grass, eat, hunt, term, titan) {
+function matrixGenerator(matrixSize, grass, grassEater,gishatich, boy, water, sun, night) {
     for (let i = 0; i < matrixSize; i++) {
         matrix[i] = [];
         for (let o = 0; o < matrixSize; o++) {
@@ -39,25 +45,35 @@ function matrixGenerator(matrixSize, grass, eat, hunt, term, titan) {
         let customY = Math.floor(random(matrixSize));
         matrix[customY][customX] = 1;
     }
-    for (let i = 0; i < eat; i++) {
+    for (let i = 0; i < grassEater; i++) {
         let customX = Math.floor(random(matrixSize));
         let customY = Math.floor(random(matrixSize));
         matrix[customY][customX] = 2;
     }
-    for (let i = 0; i < hunt; i++) {
+    for (let i = 0; i < gishatich; i++) {
         let customX = Math.floor(random(matrixSize));
         let customY = Math.floor(random(matrixSize));
         matrix[customY][customX] = 3;
     }
-    for (let i = 0; i < term; i++) {
+    for (let i = 0; i < boy; i++) {
         let customX = Math.floor(random(matrixSize));
         let customY = Math.floor(random(matrixSize));
         matrix[customY][customX] = 4;
     }
-    for (let i = 0; i < titan; i++) {
+    for (let i = 0; i < water; i++) {
         let customX = Math.floor(random(matrixSize));
         let customY = Math.floor(random(matrixSize));
         matrix[customY][customX] = 5;
+    }
+    for (let i = 0; i < sun; i++) {
+        let customX = Math.floor(random(matrixSize));
+        let customY = Math.floor(random(matrixSize));
+        matrix[customY][customX] = 6;
+    }
+    for (let i = 0; i < night; i++) {
+        let customX = Math.floor(random(matrixSize));
+        let customY = Math.floor(random(matrixSize));
+        matrix[customY][customX] = 7;
     }
 }
 matrixGenerator(20, 25, 20, 15, 10, 2);
@@ -81,7 +97,7 @@ function creatingObjects() {
             if (matrix[y][x] == 2) {
                 var grassEater = new GrassEater(x, y);
                 grassEaterArr.push(grassEater);
-                eatHashiv++;
+                grassEaterHashiv++;
             } else if (matrix[y][x] == 1) {
                 var grass = new Grass(x, y);
                 grassArr.push(grass);
@@ -90,17 +106,27 @@ function creatingObjects() {
             else if (matrix[y][x] == 3) {
                 var gishatich = new Gishatich(x, y);
                 gishatichArr.push(gishatich);
-                huntHashiv++;
+                gishatichHashiv++;
             }
             else if (matrix[y][x] == 4) {
                 var boy = new Boy(x, y);
                 boyArr.push(boy);
-                termHashiv++
+                boyHashiv++
             }
             else if (matrix[y][x] == 5) {
                 var water = new Water(x, y);
                 waterArr.push(water);
-                titanHashiv++
+                waterHashiv++
+            }
+            else if (matrix[y][x] == 6) {
+                var sun = new Sun(x, y);
+                sunArr.push(sun);
+                sunHashiv++
+            }
+            else if (matrix[y][x] == 7) {
+                var night = new Night(x, y);
+                nightArr.push(night);
+                nightHashiv++
             }
         }
     }
@@ -143,21 +169,34 @@ function game() {
             boyArr[i]. eatboy();
         }
     }
-    // if (waterArr[0] !== undefined) {
-    //     for (var i in waterArr) {
-    //         waterArr[i].eat();
-    //     }
-    // }
+    if (waterArr[0] !== undefined) {
+        for (var i in waterArr) {
+            waterArr[i].mul1();
+        }
+    }
+    if (sunArr[0] !== undefined) {
+        for (var i in sunArr) {
+            sunArr[i].eat();
+        }
+    }
+
+    if (nightArr[0] !== undefined) {
+        for (var i in nightArr) {
+            nightArr[i].eatnight();
+        }
+    }
 
     //! Object to send
     let sendData = {
         matrix: matrix,
         grassCounter: grassHashiv,
         grassLiveCounter: grassArr.length,
-        eatCounter: eatHashiv,
-        huntCounter: huntHashiv,
-        termCounter: termHashiv,
-        titanCounter: titanHashiv,
+        grassEaterCounter: grassEaterHashiv,
+        gishatichCounter: gishatichHashiv,
+        boyounter: boyHashiv,
+        waterCounter: waterHashiv,
+        sunCounter: sunHashiv,
+        nightCounter: nightHashiv,
         weather: weather
     }
 

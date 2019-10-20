@@ -1,10 +1,10 @@
 var LiveForm = require("./LiveForm");
 var random = require("./random.js");
 
-module.exports = class Gishatich extends LiveForm {
+module.exports = class Night extends LiveForm {
     constructor(x, y) {
         super(x, y);
-        this.life = 13;
+        this.energ = 50;
     }
     getNewCoordinates() {
         this.directions = [
@@ -27,35 +27,35 @@ module.exports = class Gishatich extends LiveForm {
         let newCell = random(emptyCells);
 
         if (newCell) {
-            huntHashiv++
+            nightHashiv++
             let x = newCell[0];
             let y = newCell[1];
-            matrix[y][x] = 3;
-            let gishatich = new Gishatich(x, y);
-            gishatichArr.push(gishatich);
-            this.energy = 55;
+            matrix[y][x] = 7;
+            let night = new Night(x, y);
+            nightArr.push(night);
+            this.energ = 55;
         }
     }
-    utel() {
+    eatnight() {
         let emptyCells = this.chooseCell(2);
         let newCell = random(emptyCells);
 
         if (newCell) {
 
-            this.energy++;
+            this.energ++;
             let x = newCell[0];
             let y = newCell[1];
             
-            matrix[y][x] = 3;
+            matrix[y][x] = 7;
             matrix[this.y][this.x] = 0;
-            for (let i in grassEaterArr) {
-                if (grassEaterArr[i].x == x && grassEaterArr[i].y == y) {
-                    grassEaterArr.splice(i, 1)
+            for (let i in sunArr) {
+                if (sunArr[i].x == x && sunArr[i].y == y) {
+                    sunArr.splice(i, 1)
                 }
             }
             this.x = x;
             this.y = y;
-            if (this.energy >= 10) {
+            if (this.energ >= 10) {
                 this.mul();
             }
         } else {
@@ -63,27 +63,27 @@ module.exports = class Gishatich extends LiveForm {
         }
     }
     move() {
-        this.energy--;
+        this.energ--;
         let emptyCells = this.chooseCell(0);
         let newCell = random(emptyCells);
         if (newCell) {
             let x = newCell[0];
             let y = newCell[1];
-            matrix[y][x] = 3;
+            matrix[y][x] = 7;
             matrix[this.y][this.x] = 0;
             this.y = y;
             this.x = x;
         }
-        if (this.energy < 0) {
+        if (this.energ < 0) {
             this.die();
         }
     }
     die() {
         matrix[this.y][this.x] = 0;
 
-        for (let i in gishatichArr) {
-            if (gishatichArr[i].x == this.x && gishatichArr[i].y == this.y) {
-                gishatichArr.splice(i, 1)
+        for (let i in nightArr) {
+            if (nightArr[i].x == this.x && nightArr[i].y == this.y) {
+                nightArr.splice(i, 1)
             }
         }
     }
