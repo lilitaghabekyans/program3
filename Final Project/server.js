@@ -76,7 +76,7 @@ function matrixGenerator(matrixSize, grass, grassEater,gishatich, boy, water, su
         matrix[customY][customX] = 7;
     }
 }
-matrixGenerator(20, 25, 20, 15, 10, 2);
+matrixGenerator(20, 30, 5, 15, 2, 5, 5, 5);  //matrixGenerator(20, 25, 20, 15, 10, 2);
 //! Creating MATRIX -- END
 
 //! SERVER STUFF  --  START
@@ -166,7 +166,7 @@ function game() {
     }
     if (boyArr[0] !== undefined) {
         for (var i in boyArr) {
-            boyArr[i]. eatboy();
+            boyArr[i].eatboy();
         }
     }
     if (waterArr[0] !== undefined) {
@@ -193,7 +193,7 @@ function game() {
         grassLiveCounter: grassArr.length,
         grassEaterCounter: grassEaterHashiv,
         gishatichCounter: gishatichHashiv,
-        boyounter: boyHashiv,
+        boyCounter: boyHashiv,
         waterCounter: waterHashiv,
         sunCounter: sunHashiv,
         nightCounter: nightHashiv,
@@ -203,6 +203,7 @@ function game() {
     //! Send data over the socket to clients who listens "data"
     io.sockets.emit("data", sendData);
 }
+//hdshg
 
 
 

@@ -70,7 +70,15 @@ function setup() {
                     fill('black');
                     rect(j * side, i * side, side, side);
                 }
-            }
+                else if (matrix[i][j] == 6) {
+                    fill('orange');
+                    rect(j * side, i * side, side, side);
+                }
+                else if (matrix[i][j] == 7) {
+                    fill('#4f1275');
+                    rect(j * side, i * side, side, side);
+                }
+           }
         }
     }
 }
