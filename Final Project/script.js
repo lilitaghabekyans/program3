@@ -11,6 +11,8 @@ function setup() {
     let huntCountElement = document.getElementById('huntCount');
     let terminatorCountElement = document.getElementById('termCount');
     let titanCountElement = document.getElementById('titanCount');
+    let sunCountElement = document.getElementById('sunCount');
+    let nightCountElement = document.getElementById('nightCount');
     //! adding socket listener on "data" <-- name, after that fire 'drawCreatures' function 
 
     socket.on("data", drawCreatures);
@@ -38,6 +40,8 @@ function setup() {
         huntCountElement.innerText = data.huntCounter;
         terminatorCountElement.innerText = data.termCounter;
         titanCountElement.innerText = data.titanCounter;
+        sunCountElement.innerText = data.sunCounter;
+        nightCountElement.innerText = data.nightCounter;
         //! Every time it creates new Canvas with new matrix size
         createCanvas(matrix[0].length * side, matrix.length * side)
         //! clearing background by setting it to new grey color

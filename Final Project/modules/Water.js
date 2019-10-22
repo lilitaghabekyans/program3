@@ -4,7 +4,7 @@ var random = require("./random.js");
 module.exports = class Water extends LiveForm {
     constructor(x, y) {
         super(x, y);
-        this.life = 40;
+        this.kyanq = 20;
     }
     getNewCoordinates() {
         this.directions = [
@@ -12,18 +12,10 @@ module.exports = class Water extends LiveForm {
             [this.x, this.y - 1],
             [this.x + 1, this.y - 1],
             [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1],
-            [this.x - 2, this.y - 2],
-            [this.x, this.y - 2],
-            [this.x + 2, this.y - 2],
-            [this.x - 2, this.y],
-            [this.x + 2, this.y],
-            [this.x - 2, this.y + 2],
-            [this.x, this.y + 2],
-            [this.x + 2, this.y + 2],
+            [this.x - 1, this.y - 1],
+            [this.x, this.y - 1],
+            [this.x + 1, this.y - 1],
+            [this.x - 1, this.y],
         ];
     }
     chooseCell(character) {
@@ -44,8 +36,6 @@ module.exports = class Water extends LiveForm {
         }
     }
 }
-
-
 
 
 

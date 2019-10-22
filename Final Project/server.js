@@ -76,7 +76,7 @@ function matrixGenerator(matrixSize, grass, grassEater,gishatich, boy, water, su
         matrix[customY][customX] = 7;
     }
 }
-matrixGenerator(20, 30, 5, 15, 2, 5, 5, 5);  //matrixGenerator(20, 25, 20, 15, 10, 2);
+matrixGenerator(20, 0, 0, 0, 0, 1, 7, 0);  //matrixGenerator(20, 25, 20, 15, 10, 2);
 //! Creating MATRIX -- END
 
 //! SERVER STUFF  --  START

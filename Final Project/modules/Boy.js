@@ -4,7 +4,7 @@ var random = require("./random.js");
 module.exports = class Boy extends LiveForm {
     constructor(x, y) {
         super(x, y);
-        this.life = 20;
+        this.li = 20;
     }
     getNewCoordinates() {
         this.directions = [

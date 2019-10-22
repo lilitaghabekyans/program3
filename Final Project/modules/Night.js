@@ -4,7 +4,7 @@ var random = require("./random.js");
 module.exports = class Night extends LiveForm {
     constructor(x, y) {
         super(x, y);
-        this.energ = 50;
+        this.energ = 20;
     }
     getNewCoordinates() {
         this.directions = [
@@ -12,10 +12,6 @@ module.exports = class Night extends LiveForm {
             [this.x, this.y - 1],
             [this.x + 1, this.y - 1],
             [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1],
         ];
     }
     chooseCell(character) {
@@ -33,7 +29,7 @@ module.exports = class Night extends LiveForm {
             matrix[y][x] = 7;
             let night = new Night(x, y);
             nightArr.push(night);
-            this.energ = 55;
+            this.energ = 25;
         }
     }
     eatnight() {
@@ -55,7 +51,7 @@ module.exports = class Night extends LiveForm {
             }
             this.x = x;
             this.y = y;
-            if (this.energ >= 10) {
+            if (this.energ >= 20) {
                 this.mul();
             }
         } else {
@@ -73,18 +69,6 @@ module.exports = class Night extends LiveForm {
             matrix[this.y][this.x] = 0;
             this.y = y;
             this.x = x;
-        }
-        if (this.energ < 0) {
-            this.die();
-        }
-    }
-    die() {
-        matrix[this.y][this.x] = 0;
-
-        for (let i in nightArr) {
-            if (nightArr[i].x == this.x && nightArr[i].y == this.y) {
-                nightArr.splice(i, 1)
-            }
         }
     }
 }
