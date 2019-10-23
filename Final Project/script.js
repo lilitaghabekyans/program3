@@ -2,7 +2,7 @@ function setup() {
     var socket = io();
     var side = 30;
     var matrix = [];
-    
+
     //! Getting DOM objects (HTML elements)
     let weatherElement = document.getElementById('weather');
     let grassCountElement = document.getElementById('grassCount');
@@ -52,26 +52,69 @@ function setup() {
         for (var i = 0; i < matrix.length; i++) {
             for (var j = 0; j < matrix[i].length; j++) {
                 if (matrix[i][j] == 1) {
-                    if(data.weather == "summer"){
+                    if (data.weather == "summer") {
                         fill("green");
-                    }else if (data.weather == "autumn"){
-                        fill("orange");
+                    } else if (data.weather == "autumn") {
+                        fill("#0f852e");
+                    }
+                    else if (data.weather == "winter") {
+                        fill("#30c257");
+                    }
+                    else if (data.weather == "spring") {
+                        fill("#167530");
                     }
                     rect(j * side, i * side, side, side);
-                } else if (matrix[i][j] == 2) {
-                    fill("yellow");
+                }
+                else if (matrix[i][j] == 2) {
+                    if (data.weather == "summer") {
+                        fill("#d4f518");
+                    } else if (data.weather == "autumn") {
+                        fill("#a9c219");
+                    }
+                    else if (data.weather == "winter") {
+                        fill("#d5eb59");
+                    }
+                    else if (data.weather == "spring") {
+                        fill("#bbdb02");
+                    }
                     rect(j * side, i * side, side, side);
-                } else if (matrix[i][j] == 0) {
+                }
+                else if (matrix[i][j] == 0) {
                     fill('#acacac');
                     rect(j * side, i * side, side, side);
                 } else if (matrix[i][j] == 3) {
-                    fill('red');
+                    if (data.weather == "summer") {
+                        fill("#ab0205");
+                    }
+                    if (data.weather == "autumn") {
+                        fill("#d11518");
+                    }
+                    if (data.weather == "winter") {
+                        fill("#ed3b3e");
+                    }
+                    if (data.weather == "spring") {
+                        fill("#d40f12");
+                    }
                     rect(j * side, i * side, side, side);
                 } else if (matrix[i][j] == 4) {
-                    fill('blue');
+                    if (data.weather == "summer") {
+                        fill("#070963");}
+                        if (data.weather == "autumn") {
+                            fill("#151896");}
+                            if (data.weather == "winter") {
+                                fill("#464aeb");}
+                                if (data.weather == "spring") {
+                                    fill("#060aba");}
                     rect(j * side, i * side, side, side);
                 } else if (matrix[i][j] == 5) {
-                    fill('black');
+                    if (data.weather == "summer") {
+                        fill("#02020a");}
+                        if (data.weather == "autumn") {
+                            fill("#0f0f24");}
+                            if (data.weather == "winter") {
+                                fill("#3c3c4d");}
+                                if (data.weather == "spring") {
+                                    fill("#141429");}
                     rect(j * side, i * side, side, side);
                 }
                 else if (matrix[i][j] == 6) {
@@ -82,7 +125,10 @@ function setup() {
                     fill('#4f1275');
                     rect(j * side, i * side, side, side);
                 }
-           }
+            }
         }
     }
 }
+
+
+

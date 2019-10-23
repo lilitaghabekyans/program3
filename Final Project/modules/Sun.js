@@ -19,7 +19,7 @@ module.exports = class Sun extends LiveForm {
         return super.chooseCell(character);
     }
     eat() {
-        let emptyCells = this.chooseCell(2);
+        let emptyCells = this.chooseCell(5);
         let newCell = random(emptyCells);
 
         if (newCell) {
@@ -38,10 +38,8 @@ module.exports = class Sun extends LiveForm {
             this.x = x;
             this.y = y;
             if (this.ener >= 10) {
-                this.mul();
+                this.move()
             }
-        } else {
-            this.move()
         }
     }
     move() {

@@ -4,7 +4,7 @@ var GrassEater = require("./modules/GrassEater.js");
 var Gishatich = require("./modules/Gishatich.js");
 var Boy = require("./modules/Boy.js");
 var Water= require("./modules/Water.js");
-var Sun= require("./modules/Sun.js");
+var Sun = require("./modules/Sun.js");
 var Night= require("./modules/Night.js");
 let random = require('./modules/random');
 //! Requiring modules  --  END
@@ -76,7 +76,7 @@ function matrixGenerator(matrixSize, grass, grassEater,gishatich, boy, water, su
         matrix[customY][customX] = 7;
     }
 }
-matrixGenerator(20, 0, 0, 0, 0, 1, 7, 0);  //matrixGenerator(20, 25, 20, 15, 10, 2);
+matrixGenerator(20, 15, 5, 5, 5, 5, 5, 0);  //matrixGenerator(20, 25, 20, 15, 10, 2);
 //! Creating MATRIX -- END
 
 //! SERVER STUFF  --  START
@@ -135,15 +135,22 @@ function creatingObjects() {
 creatingObjects();
 
 let exanak = 0;
-let weather = "winter"
+let weather = "weather"
 
 function game() {
 
     exanak++;
     if (exanak <= 10){
         weather = "summer"
+        
     }else if (exanak <= 20){
         weather = "autumn"
+    }
+    else if (exanak <= 30){
+        weather = "winter"
+    }
+    else if (exanak <= 40){
+        weather = "spring"
     }else if (exanak > 20){
         exanak = 0
     }
