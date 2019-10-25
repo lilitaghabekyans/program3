@@ -76,7 +76,7 @@ function matrixGenerator(matrixSize, grass, grassEater,gishatich, boy, water, su
         matrix[customY][customX] = 7;
     }
 }
-matrixGenerator(20, 15, 5, 5, 5, 5, 5, 0);  //matrixGenerator(20, 25, 20, 15, 10, 2);
+matrixGenerator(20, 15, 5, 5, 5, 5, 10, 0);  //matrixGenerator(20, 25, 20, 15, 10, 2);
 //! Creating MATRIX -- END
 
 //! SERVER STUFF  --  START
@@ -97,7 +97,7 @@ function creatingObjects() {
             if (matrix[y][x] == 2) {
                 var grassEater = new GrassEater(x, y);
                 grassEaterArr.push(grassEater);
-                grassEaterHashiv++;
+                grassEaterHashiv++
             } else if (matrix[y][x] == 1) {
                 var grass = new Grass(x, y);
                 grassArr.push(grass);
@@ -106,7 +106,7 @@ function creatingObjects() {
             else if (matrix[y][x] == 3) {
                 var gishatich = new Gishatich(x, y);
                 gishatichArr.push(gishatich);
-                gishatichHashiv++;
+                gishatichHashiv++
             }
             else if (matrix[y][x] == 4) {
                 var boy = new Boy(x, y);
@@ -178,20 +178,20 @@ function game() {
     }
     if (waterArr[0] !== undefined) {
         for (var i in waterArr) {
-            waterArr[i].mul1();
+            waterArr[i].mul();
         }
     }
     if (sunArr[0] !== undefined) {
         for (var i in sunArr) {
-            sunArr[i].eat();
+            sunArr[i].mul();
         }
     }
 
-    if (nightArr[0] !== undefined) {
-        for (var i in nightArr) {
-            nightArr[i].eatnight();
-        }
-    }
+    // if (nightArr[0] !== undefined) {
+    //     for (var i in nightArr) {
+    //         nightArr[i].eatnight();
+    //     }
+    // }
 
     //! Object to send
     let sendData = {
@@ -199,11 +199,15 @@ function game() {
         grassCounter: grassHashiv,
         grassLiveCounter: grassArr.length,
         grassEaterCounter: grassEaterHashiv,
+        grassEaterLiveCounter: grassEaterArr.length,
         gishatichCounter: gishatichHashiv,
+        gishatichLiveCounter: gishatichArr.length,
         boyCounter: boyHashiv,
+        boyLiveCounter: boyArr.length,
         waterCounter: waterHashiv,
+        waterLiveCounter: waterArr.length,
         sunCounter: sunHashiv,
-        nightCounter: nightHashiv,
+        sunLiveCounter: sunArr.length,
         weather: weather
     }
 

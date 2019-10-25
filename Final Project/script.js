@@ -8,11 +8,15 @@ function setup() {
     let grassCountElement = document.getElementById('grassCount');
     let grassLiveCountElement = document.getElementById('grassLiveCount');
     let grassEaterCountElement = document.getElementById('grassEaterCount');
-    let huntCountElement = document.getElementById('huntCount');
-    let terminatorCountElement = document.getElementById('termCount');
-    let titanCountElement = document.getElementById('titanCount');
+    let grassEaterLiveCountElement = document.getElementById('grassEaterLiveCount');
+    let gishatichCountElement = document.getElementById('gishatichCount');
+    let gishatichLiveCountElement = document.getElementById('gishatichLiveCount');
+    let boyCountElement = document.getElementById('boyCount');
+    let boyLiveCountElement = document.getElementById('boyLiveCount');
+    let waterCountElement = document.getElementById('waterCount');
+    let waterLiveCountElement = document.getElementById('waterLiveCount');
     let sunCountElement = document.getElementById('sunCount');
-    let nightCountElement = document.getElementById('nightCount');
+    let sunLiveCountElement = document.getElementById('sunLiveCount');
     //! adding socket listener on "data" <-- name, after that fire 'drawCreatures' function 
 
     socket.on("data", drawCreatures);
@@ -33,15 +37,19 @@ function setup() {
 
         //! after getting data pass it to matrix variable
         matrix = data.matrix;
-        weatherElement.innerText = data.weather; "summer"
+        weatherElement.innerText = data.weather; "summer" 
         grassCountElement.innerText = data.grassCounter;
         grassLiveCountElement.innerText = data.grassLiveCounter;
-        grassEaterCountElement.innerText = data.eatCounter;
-        huntCountElement.innerText = data.huntCounter;
-        terminatorCountElement.innerText = data.termCounter;
-        titanCountElement.innerText = data.titanCounter;
+        grassEaterCountElement.innerText = data.grassEaterCounter;
+        grassEaterLiveCountElement.innerText = data.grassEaterLiveCounter;
+        gishatichCountElement.innerText = data.gishatichCounter;
+        gishatichLiveCountElement.innerText = data.gishatichLiveCounter;
+        boyCountElement.innerText = data.boyCounter;
+        boyLiveCountElement.innerText = data.boyLiveCounter;
+        waterCountElement.innerText = data.waterCounter;
+        waterLiveCountElement.innerText = data.waterLiveCounter;
         sunCountElement.innerText = data.sunCounter;
-        nightCountElement.innerText = data.nightCounter;
+        sunLiveCountElement.innerText = data.sunLiveCounter;
         //! Every time it creates new Canvas with new matrix size
         createCanvas(matrix[0].length * side, matrix.length * side)
         //! clearing background by setting it to new grey color
@@ -96,7 +104,7 @@ function setup() {
                         fill("#d40f12");
                     }
                     rect(j * side, i * side, side, side);
-                } else if (matrix[i][j] == 4) {
+                } else if (matrix[i][j] == 5) {
                     if (data.weather == "summer") {
                         fill("#070963");}
                         if (data.weather == "autumn") {
@@ -106,7 +114,7 @@ function setup() {
                                 if (data.weather == "spring") {
                                     fill("#060aba");}
                     rect(j * side, i * side, side, side);
-                } else if (matrix[i][j] == 5) {
+                } else if (matrix[i][j] == 4) {
                     if (data.weather == "summer") {
                         fill("#02020a");}
                         if (data.weather == "autumn") {
@@ -118,11 +126,14 @@ function setup() {
                     rect(j * side, i * side, side, side);
                 }
                 else if (matrix[i][j] == 6) {
-                    fill('orange');
-                    rect(j * side, i * side, side, side);
-                }
-                else if (matrix[i][j] == 7) {
-                    fill('#4f1275');
+                    if (data.weather == "summer") {
+                        fill("#b87100");}
+                        if (data.weather == "autumn") {
+                            fill("#cc810a");}
+                            if (data.weather == "winter") {
+                                fill("#e89e27");}
+                                if (data.weather == "spring") {
+                                    fill("#d48506");}
                     rect(j * side, i * side, side, side);
                 }
             }
