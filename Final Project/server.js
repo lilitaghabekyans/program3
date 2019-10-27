@@ -5,7 +5,6 @@ var Gishatich = require("./modules/Gishatich.js");
 var Boy = require("./modules/Boy.js");
 var Water= require("./modules/Water.js");
 var Sun = require("./modules/Sun.js");
-var Night= require("./modules/Night.js");
 let random = require('./modules/random');
 //! Requiring modules  --  END
 
@@ -16,7 +15,6 @@ gishatichArr = [];
 boyArr = [];
 waterArr = [];
 sunArr = [];
-nightArr = [];
 matrix = [];
 //! Initializing global arrays  --  END
 
@@ -27,13 +25,12 @@ gishatichHashiv = 0;
 boyHashiv = 0;
 waterHashiv = 0;
 sunHashiv = 0;
-nightHashiv = 0;
 // statistics end
 
 // time = 0
 //! Creating MATRIX -- START
 
-function matrixGenerator(matrixSize, grass, grassEater,gishatich, boy, water, sun, night) {
+function matrixGenerator(matrixSize, grass, grassEater, gishatich, boy, water, sun) {
     for (let i = 0; i < matrixSize; i++) {
         matrix[i] = [];
         for (let o = 0; o < matrixSize; o++) {
@@ -70,13 +67,8 @@ function matrixGenerator(matrixSize, grass, grassEater,gishatich, boy, water, su
         let customY = Math.floor(random(matrixSize));
         matrix[customY][customX] = 6;
     }
-    for (let i = 0; i < night; i++) {
-        let customX = Math.floor(random(matrixSize));
-        let customY = Math.floor(random(matrixSize));
-        matrix[customY][customX] = 7;
-    }
 }
-matrixGenerator(20, 15, 5, 5, 5, 5, 10, 0);  //matrixGenerator(20, 25, 20, 15, 10, 2);
+matrixGenerator(40, 500, 25, 45, 10, 5, 10);
 //! Creating MATRIX -- END
 
 //! SERVER STUFF  --  START
@@ -123,11 +115,6 @@ function creatingObjects() {
                 sunArr.push(sun);
                 sunHashiv++
             }
-            else if (matrix[y][x] == 7) {
-                var night = new Night(x, y);
-                nightArr.push(night);
-                nightHashiv++
-            }
         }
     }
 }
@@ -151,7 +138,7 @@ function game() {
     }
     else if (exanak <= 40){
         weather = "spring"
-    }else if (exanak > 20){
+    }else if (exanak > 40){
         exanak = 0
     }
 
@@ -183,29 +170,27 @@ function game() {
     }
     if (sunArr[0] !== undefined) {
         for (var i in sunArr) {
-            sunArr[i].mul();
+            sunArr[i].move();
         }
     }
-
-    // if (nightArr[0] !== undefined) {
-    //     for (var i in nightArr) {
-    //         nightArr[i].eatnight();
-    //     }
-    // }
-
     //! Object to send
     let sendData = {
         matrix: matrix,
         grassCounter: grassHashiv,
         grassLiveCounter: grassArr.length,
+
         grassEaterCounter: grassEaterHashiv,
         grassEaterLiveCounter: grassEaterArr.length,
+
         gishatichCounter: gishatichHashiv,
         gishatichLiveCounter: gishatichArr.length,
+
         boyCounter: boyHashiv,
         boyLiveCounter: boyArr.length,
+
         waterCounter: waterHashiv,
         waterLiveCounter: waterArr.length,
+
         sunCounter: sunHashiv,
         sunLiveCounter: sunArr.length,
         weather: weather
@@ -214,8 +199,6 @@ function game() {
     //! Send data over the socket to clients who listens "data"
     io.sockets.emit("data", sendData);
 }
-//hdshg
 
 
-
-setInterval(game, 1000)
+setInterval(game, 500)

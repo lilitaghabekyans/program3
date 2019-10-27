@@ -4,7 +4,7 @@ var random = require("./random.js");
 module.exports = class Gishatich extends LiveForm {
     constructor(x, y) {
         super(x, y);
-        this.life = 13;
+        this.energy = 13;
     }
     getNewCoordinates() {
         this.directions = [
@@ -33,7 +33,7 @@ module.exports = class Gishatich extends LiveForm {
             matrix[y][x] = 3;
             let gishatich = new Gishatich(x, y);
             gishatichArr.push(gishatich);
-            this.energy = 55;
+            this.energy = 13;
         }
     }
     utel() {
@@ -55,7 +55,7 @@ module.exports = class Gishatich extends LiveForm {
             }
             this.x = x;
             this.y = y;
-            if (this.energy >= 10) {
+            if (this.energy >= 15) {
                 this.mul();
             }
         } else {
@@ -65,12 +65,18 @@ module.exports = class Gishatich extends LiveForm {
     move() {
         this.energy--;
         let emptyCells = this.chooseCell(0);
-        let newCell = random(emptyCells);
+        let emptyCells1 = this.chooseCell(1);
+        let newCell = random(emptyCells.concat(emptyCells1));
         if (newCell) {
             let x = newCell[0];
             let y = newCell[1];
             matrix[y][x] = 3;
             matrix[this.y][this.x] = 0;
+            for (let i in grassArr) {
+                if (grassArr[i].x == this.x && grassArr[i].y == this.y) {
+                    grassArr.splice(i, 1)
+                }
+            }
             this.y = y;
             this.x = x;
         }
